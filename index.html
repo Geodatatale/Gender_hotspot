@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Lynn Chepcheng">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <title>Webmap 201</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="src/leaflet.css">
+        <link rel="stylesheet" href="src/css/bootstrap.css">
+        <link rel="stylesheet" href="src/plugins/L.Control.MousePosition.css">
+        <link rel="stylesheet" href="src/plugins/L.Control.Sidebar.css">
+        <link rel="stylesheet" href="src/plugins/Leaflet.PolylineMeasure.css">
+        <link rel="stylesheet" href="src/plugins/easy-button.css">
+        <link rel="stylesheet" href="src/plugins/leaflet-styleeditor/css/Leaflet.StyleEditor.css">
+        <link rel="stylesheet" href="src/css/font-awesome.min.css">
+        <link rel="stylesheet" href="src/plugins/leaflet.awesome-markers.css">
+        <link rel="stylesheet" href="src/plugins/leaflet-legend.css">
+        <link rel="stylesheet" href="src/css/style.css">
+        <link rel="stylesheet" href="src/plugins/leaflet.reachability.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/trafforddatalab/leaflet.reachability@v2.0.1/leaflet.reachability.min.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="src/Leaflet.BigImage.min.css">
+        <link rel="stylesheet" href="src/plugins/leaflet.groupedlayercontrol.min.css">
+        <link rel="stylesheet" href="src/css/dashstyle.css">
+        <link rel="stylesheet" href="src/plugins/leaflet.label.css">
+
+        <link rel="stylesheet" href="side/style.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.2.2/font/bootstrap-icons.css">
+       
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="src/leaflet-src.js"></script>
+        <script src="src/jquery-3.2.0.min.js"></script>
+        <script src="src/plugins/L.Control.MousePosition.js"></script>
+        <script src="src/plugins/L.Control.Sidebar.js"></script>
+        <script src="src/plugins/Leaflet.PolylineMeasure.js"></script>
+        <script src="src/plugins/easy-button.js"></script>
+        <script src="src/plugins/leaflet-providers.js"></script>
+        <script src="src/plugins/leaflet.ajax.min.js"></script>
+        <script src="src/plugins/leaflet.sprite.js"></script>
+        <script src="src/plugins/leaflet.awesome-markers.min.js"></script>
+        <script src="src/plugins/leaflet-mapkey/L.Icon.Mapkey.js"></script>
+        <script src="src/plugins/leaflet.markercluster.js"></script>
+        <script src="src/plugins/leaflet.geometryutil.js"></script>
+        <script src="src/plugins/leaflet-legend.js"></script>
+        <script src="src/jquery-ui.min.js"></script>
+        <script src="src/turf.min.js"></script>
+        <script src="js/leaflet.sld.js"></script>
+        <script src="src/plugins/leaflet.label.js"></script>
+
+
+    </head>
+    <body>
+        <div id="header" class="col-md-12 ">
+            <h3 class="text-center" ><span style="padding: inherit;font-size: 23pt;
+              font-weight: 900;text-align: center;">Climate Change-Agriculture-Gender Hotspot Mapping </h3>
+           </div>         
+
+   </div>
+   
+        <div id="side-bar" class="col-md-3">
+       <div class="container mw-100 col-md-12">
+        <h5 class="text-muted">Agriculture-Gender-Climate Risk Maps</h5>
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+              <a class="nav-link collapsed" data-bs-target="#agric" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>Agriculture</span><i class="bi bi-chevron-down ms-auto"></i>
+              </a>
+              <ul id="agric" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                  <a class="nav-link collapsed" data-bs-target="#input-use" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Input Use</span><i class="bi bi-chevron-down ms-auto"></i>
+                  </a>
+                  <ul id="input-use" class="nav-content collapse" data-bs-parent="#agric">
+                    <li>
+                      <a href="#" onclick="openLryken(); LegendA1();">
+                        <i class="bi bi-circle"></i><span>Agricultural HHs using improved seeds(%)</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" onclick="openAgri1(); LegendA2();">
+                        <i class="bi bi-circle"></i><span>  Agricultural HHs using organic fertilizer(%)</span>
+                      </a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="openAgri2(); LegendA3();">
+                          <i class="bi bi-circle"></i><span>Agricultural HHs using inorganic fertilizer(%)</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="openAgri3(); LegendA4();">
+                          <i class="bi bi-circle"></i><span> Agricultural HHs using pesticides(%)</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="openLandProtect(); LegendA5();">
+                          <i class="bi bi-circle"></i><span> Agriculture HHs using soil erosion control(%)</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="openAgroF(); LegendA6();">
+                          <i class="bi bi-circle"></i><span> Agriculture HHs planting agroforestry(%)</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="openIrrigation(); LegendA7();">
+                          <i class="bi bi-circle"></i><span> Agriculture HHs practising irrigation(%)</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="openEquip(); LegendA8();">
+                          <i class="bi bi-circle"></i><span>Agriculture HHs using farm equipment(%)</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="openComms();  LegendA9();">
+                          <i class="bi bi-circle"></i><span> Agriculture HHs access to atleast one communication asset(%) (radio, TV, phone, internet)</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="openServ(); LegendA10();">
+                          <i class="bi bi-circle"></i><span> Agriculture HHs receiving extension services (%)</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="openCoop(); LegendA11();">
+                          <i class="bi bi-circle"></i><span> Agriculture HHs membership with agricultural cooperatives/ association(%)</span>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" onclick="openFarmSch(); LegendA12();">
+                          <i class="bi bi-circle"></i><span> Agriculture HHs participating in farmer field school(%)</span>
+                        </a>
+                      </li>
+
+                  </ul>
+                </li>
+                <li>
+                    <a class="nav-link collapsed" data-bs-target="#gender" data-bs-toggle="collapse" href="#">
+                      <i class="bi bi-journal-text"></i><span>Agriculture and Gender</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="gender" class="nav-content collapse" data-bs-parent="#agric">
+                      <li>
+                        <a href="#" onclick="opentland(); LegendG1();">
+                          <i class="bi bi-circle"></i><span> Total land area ('0000 Ha)</span>
+                        </a>
+                      </li>
+                      <li>
+                          <a href="#" onclick="openAgrland(); LegendG2();">
+                            <i class="bi bi-circle"></i><span> Agricultural land ('000 Ha)</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openPagland(); LegendG3();">
+                            <i class="bi bi-circle"></i><span> Agricultural land(%)</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openAgrihh(); LegendG4();">
+                            <i class="bi bi-circle"></i><span> Agricultural households(%)</span>
+                          </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="openMalehead(); LegendG5();">
+                              <i class="bi bi-circle"></i><span> Household with male head(%)</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openFemalehead(); LegendG6();">
+                              <i class="bi bi-circle"></i><span> Household with female head(%)</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openMalefarm(); LegendG7();">
+                              <i class="bi bi-circle"></i><span>Total male farmers(%)</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openFemfarm(); LegendG8();">
+                              <i class="bi bi-circle"></i><span> Total female farmers(%)</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openSmall(); LegendG9();">
+                              <i class="bi bi-circle"></i><span>Agriculture HHs own land smaller than 0.5ha (%)</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openPoor(); LegendG10();">
+                              <i class="bi bi-circle"></i><span> Agriculture HHs in two poorest wealth quintiles(%)</span>
+                            </a>
+                          </li>
+                    </ul>
+                </li>
+              </ul>
+            </li><!-- End Forms Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#climate" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-journal-text"></i><span>Climate</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="climate" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                  <li>
+                    <a class="nav-link collapsed" data-bs-target="#current" data-bs-toggle="collapse" href="#">
+                      <i class="bi bi-journal-text"></i><span>Current Climate Change</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="current" class="nav-content collapse" data-bs-parent="#agric">
+                      <li>
+                        <a href="#" onclick="openDrydays(); LegendC1();">
+                          <i class="bi bi-circle"></i><span>Maximum Number of consecutive Dry days</span>
+                        </a>
+                      </li>
+                      <li>
+                          <a href="#" onclick="openAvTemp(); LegendC2();">
+                            <i class="bi bi-circle"></i><span> Average Temperature (degree celsius)</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openAvPrec(); LegendC3();">
+                            <i class="bi bi-circle"></i><span> Average Precipitation (% change)</span>
+                          </a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li>
+                      <a class="nav-link collapsed" data-bs-target="#future" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-journal-text"></i><span>Future climate Projections</span><i class="bi bi-chevron-down ms-auto"></i>
+                      </a>
+                      <ul id="future" class="nav-content collapse" data-bs-parent="#agric">
+                        <li>
+                          <a href="#" onclick="openT30(); LegendC4();">
+                            <i class="bi bi-circle"></i><span> Temperature 2030</span>
+                          </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="openT50(); LegendC5();">
+                              <i class="bi bi-circle"></i><span> Temperature 2050</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openT80(); LegendC6();">
+                              <i class="bi bi-circle"></i><span> Temperature 2080</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openP30(); LegendC7();">
+                              <i class="bi bi-circle"></i><span> Precipitation 2030</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openP50(); LegendC8();">
+                              <i class="bi bi-circle"></i><span> Precipitation 2050</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openP80(); LegendC9();">
+                              <i class="bi bi-circle"></i><span> Precipitation 2080</span>
+                            </a>
+                          </li>
+                      </ul>
+                  </li>
+                </ul>
+              </li><!-- End Forms Nav -->
+              <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#food" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-journal-text"></i><span>Food & Health</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="food" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                  <li>
+                    <a class="nav-link collapsed" data-bs-target="#food-sec" data-bs-toggle="collapse" href="#">
+                      <i class="bi bi-journal-text"></i><span>Food Security</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="food-sec" class="nav-content collapse" data-bs-parent="#food">
+                      <li>
+                        <a href="#" onclick="openFood(); LegendF1();">
+                          <i class="bi bi-circle"></i><span> Moderately and severly food insecure population(%) </span>
+                        </a>
+                      </li>
+                      <li>
+                          <a href="#" onclick="openLivelihood(); LegendF2();">
+                            <i class="bi bi-circle"></i><span> Livelihood with Agriculture & livestock population(%)</span>
+                          </a>
+                        </li>
+                        <!-- <li>
+                          <a href="#" onclick="openSmalland(); LegendF3();">
+                            <i class="bi bi-circle"></i><span> Own land smaller than 0.5 ha</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openPoorquant(); LegendF4();">
+                            <i class="bi bi-circle"></i><span> HH in two poorest wealth quantiles</span>
+                          </a>
+                        </li> -->
+                        <li>
+                            <a href="#" onclick="openStorage(); LegendF5();">
+                              <i class="bi bi-circle"></i><span> HHs with no storage of harvested foods(%)</span>
+                            </a>
+                          </li>
+                    </ul>
+                  </li>
+                  <li>
+                      <a class="nav-link collapsed" data-bs-target="#health" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-journal-text"></i><span>Women Health</span><i class="bi bi-chevron-down ms-auto"></i>
+                      </a>
+                      <ul id="health" class="nav-content collapse" data-bs-parent="#food">
+                        <li>
+                          <a href="#" onclick="openFertility(); LegendF6();">
+                            <i class="bi bi-circle"></i><span> Total fertility rate</span>
+                          </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="openForty(); LegendF8();">
+                              <i class="bi bi-circle"></i><span> Mean number of children ever born to women ages 40-49</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openBMI(); LegendF7();">
+                              <i class="bi bi-circle"></i><span> Women with abnormal BMI (%)</span>
+                            </a>
+                          </li>
+                      </ul>
+                  </li>
+                </ul>
+              </li><!-- End Forms Nav -->
+              <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#hdi" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-journal-text"></i><span>HDI</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="hdi" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                  <li>
+                    <a class="nav-link collapsed" data-bs-target="#GDL" data-bs-toggle="collapse" href="#">
+                      <i class="bi bi-journal-text"></i><span>Gender Development 2019</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="GDL" class="nav-content collapse" data-bs-parent="#hdi">
+                      <li>
+                        <a href="#" onclick="openhdifemale(); LegendH1();">
+                          <i class="bi bi-circle"></i><span>  HDI females</span>
+                        </a>
+                      </li>
+                      <li>
+                          <a href="#" onclick="openhdimale(); LegendH2();">
+                            <i class="bi bi-circle"></i><span>  HDI males</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openhealthf(); LegendH3();">
+                            <i class="bi bi-circle"></i><span> Health index females</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openhealthm2(); LegendH4();">
+                            <i class="bi bi-circle"></i><span> Health index males</span>
+                          </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="openhealthm3(); LegendH5();">
+                              <i class="bi bi-circle"></i><span> Educational index females</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openhealthm4(); LegendH6();">
+                              <i class="bi bi-circle"></i><span> Educational index males</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openhealthm5(); LegendH7();">
+                              <i class="bi bi-circle"></i><span> Income index females</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#"onclick="openhealthm6(); LegendH8();">
+                              <i class="bi bi-circle"></i><span> Income index males</span>
+                            </a>
+                          </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li><!-- End Forms Nav -->
+              <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#hotspot" data-bs-toggle="collapse" href="#">
+                  <i class="bi bi-journal-text"></i><span>Hotspots Analysis</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="hotspot" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                  <li>
+                    <a class="nav-link collapsed" data-bs-target="#exposure" data-bs-toggle="collapse" href="#">
+                      <i class="bi bi-journal-text"></i><span>Climate Change Exposure</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="exposure" class="nav-content collapse" data-bs-parent="#hotspot">
+                      <li>
+                        <a href="#" onclick="openWetdays();LegendExp1();">
+                          <i class="bi bi-circle"></i><span> Decrease in Wet days (%) </span>
+                        </a>
+                      </li>
+                      <li>
+                          <a href="#" onclick="openTemp();LegendExp2();">
+                            <i class="bi bi-circle"></i><span> Increase in  Average Temperature (%)</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openPrec();LegendExp3();">
+                            <i class="bi bi-circle"></i><span> Decrease in Average Precipitation (%)</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openWAv();LegendExp4();">
+                            <i class="bi bi-circle"></i><span> Exposure Index</span>
+                          </a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a class="nav-link collapsed" data-bs-target="#sensitivity" data-bs-toggle="collapse" href="#">
+                      <i class="bi bi-journal-text"></i><span>Agriculture-Women Sensitivity</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="sensitivity" class="nav-content collapse" data-bs-parent="#hotspot">
+                      <li>
+                        <a href="#" onclick="openswn1(); Legendswn();">
+                          <i class="bi bi-circle"></i><span> Agricultural land(%)</span>
+                        </a>
+                      </li>
+                      <li>
+                          <a href="#" onclick="openswn(); Legendswn1();">
+                            <i class="bi bi-circle"></i><span> Agricultural households(%)</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openswn2(); Legendswn2();">
+                            <i class="bi bi-circle"></i><span>Average agriculture land and agriculture HHs(%)</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openswn3(); Legendswn3();">
+                            <i class="bi bi-circle"></i><span> Household with female head(%)</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openswn4(); Legendswn4();">
+                            <i class="bi bi-circle"></i><span> Total female farmers(%)</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openswn5(); Legendswn5();">
+                            <i class="bi bi-circle"></i><span> Sensitivity Index</span>
+                          </a>
+                        </li>
+                    </ul>
+                </li>
+                  <li>
+                    <a class="nav-link collapsed" data-bs-target="#adaptive" data-bs-toggle="collapse" href="#">
+                      <i class="bi bi-journal-text"></i><span>Women Adaptive Capacity</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="adaptive" class="nav-content collapse" data-bs-parent="#hotspot">
+                      <li>
+                        <a href="#" onclick="openHealthindex(); Legendada1();">
+                          <i class="bi bi-circle"></i><span> Health Index </span>
+                        </a>
+                      </li>
+                      <li>
+                          <a href="#" onclick="openIncomeindex(); Legendada2();"> 
+                            <i class="bi bi-circle"></i><span> Income index females</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openEduindex(); Legendada3();">
+                            <i class="bi bi-circle"></i><span> Educational index females</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openAvadapt(); Legendada4();">
+                            <i class="bi bi-circle"></i><span> Adaptive Capacity Index</span>
+                          </a>
+                        </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a class="nav-link collapsed" data-bs-target="#Hotspots" data-bs-toggle="collapse" href="#">
+                      <i class="bi bi-journal-text"></i><span>Hotspots</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="Hotspots" class="nav-content collapse" data-bs-parent="#hotspot">
+                      <!-- <li>
+                        <a href="#" onclick="openexp();LegendHts1();">
+                          <i class="bi bi-circle"></i><span> Exposure</span>
+                        </a>
+                      </li>
+                      <li>
+                          <a href="#" onclick="openexp1();LegendHts2();">
+                            <i class="bi bi-circle"></i><span> Sensitivity</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openexp2();LegendHts3();">
+                            <i class="bi bi-circle"></i><span> Adaptive Capacity</span>
+                          </a>
+                        </li> -->
+                        <!-- <li>
+                          <a href="#" onclick="openexp3()">
+                            <i class="bi bi-circle"></i><span> Vulnerability</span>
+                          </a>
+                        </li> -->
+                        <li>
+                          <a href="#" onclick="openexp4();LegendHts4();">
+                            <i class="bi bi-circle"></i><span> Vulnerability Index</span>
+                          </a>
+                        </li>
+                    </ul>
+                  </li>
+                 
+                  <li>
+                    <a class="nav-link collapsed" data-bs-target="#exposure" data-bs-toggle="collapse" href="#">
+                      <i class="bi bi-journal-text"></i><span>Projected Future Climate Risk</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="exposure" class="nav-content collapse" data-bs-parent="#hotspot">
+                      <!-- <li>
+                        <a href="#" onclick="openTemp30()">
+                          <i class="bi bi-circle"></i><span> Temperature 2030</span>
+                        </a>
+                      </li>
+                      <li>
+                          <a href="#" onclick="openTemp50()">
+                            <i class="bi bi-circle"></i><span> Temperature 2050</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openTemp80()">
+                            <i class="bi bi-circle"></i><span> Temperature 2080</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#" onclick="openPrec30()">
+                            <i class="bi bi-circle"></i><span> Precipitation 2030</span>
+                          </a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="openPrec50()">
+                              <i class="bi bi-circle"></i><span> Precipitation 2050</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openPrec80()">
+                              <i class="bi bi-circle"></i><span> Precipitation 2080</span>
+                            </a>
+                          </li> -->
+                          <li>
+                            <a href="#" onclick="openTexpo30()">
+                              <i class="bi bi-circle"></i><span> Total Exposure 2030</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openTexpo50()">
+                              <i class="bi bi-circle"></i><span> Total Exposure 2050</span>
+                            </a>
+                          </li>
+                          <li>
+                            <a href="#" onclick="openTexpo80()">
+                              <i class="bi bi-circle"></i><span> Total Exposure 2080</span>
+                            </a>
+                          </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li><!-- End Forms Nav -->
+             
+          </ul>
+        
+    </div>
+        </div>
+
+        <div id="mapdiv" class="col-md-12"></div>
+
+        <script src="main.js"></script>
+         <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+         <script src="side/main.js"></script>
+
+    </body>
+</html>

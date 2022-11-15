@@ -1,0 +1,89 @@
+ #mapdiv {
+                height:93vh;
+            }
+
+            .col-xs-12, .col-xs-6, .col-xs-4 {
+                padding:0px;
+            }
+
+            #divProject {
+                background-color: beige;
+            }
+            
+            #divBUOWL {
+                background-color: #ffffb3;
+            }
+            
+            #divEagle {
+                background-color: #4D4D4D;
+                color: azure;
+            }
+            
+            #divRaptor {
+                background-color: #e6ffff;
+            }
+            
+            .errorMsg {
+                padding:0;
+                text-align:center;
+                background-color:darksalmon;
+            }
+            .popup{
+            background-color: whitesmoke;
+            color: black;
+            background-size: cover;
+            
+            }
+
+            .legend {
+            padding: 6px 8px;
+            background-color: rgba(255,255,255,0.8);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-radius: 5px;
+
+            }
+            .legend i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 8px;
+            opacity: 0.7;
+            }
+            div.legend.leaflet-control br {
+            clear: both;
+            }
+            #header{
+             color:  white;
+                font-weight: bolder;
+             background-color:  rgba(31, 4, 94);
+                font-size: 50px;
+
+            }
+            #footer
+            {
+           background-color:  #FFCBA4; 
+            }
+            #logo
+            {
+           float: left;
+                
+            }
+            #side-bar
+            {
+                background: #D4D4D6;
+            }
+            #rent
+            {
+                color: aliceblue;
+            }
+             .reachability-control-settings-button
+            {
+                font-size: 22px;
+            }
+            #Image{
+                width: 20px;
+                height: 20px;
+            }
+#popup{
+    color: black;
+}
